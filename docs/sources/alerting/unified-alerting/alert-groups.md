@@ -1,7 +1,8 @@
 +++
-title = "Alert groups"
+aliases = ["/docs/grafana/latest/alerting/alert-groups/", "/docs/grafana/latest/alerting/unified-alerting/alert-groups/"]
 description = "Alert groups"
 keywords = ["grafana", "alerting", "alerts", "groups"]
+title = "Alert groups"
 weight = 400
 +++
 

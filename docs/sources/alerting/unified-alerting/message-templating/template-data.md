@@ -1,6 +1,7 @@
 +++
-title = "Template data"
+aliases = ["/docs/grafana/latest/alerting/message-templating/template-data/", "/docs/grafana/latest/alerting/unified-alerting/message-templating/template-data/"]
 keywords = ["grafana", "alerting", "guide", "contact point", "templating"]
+title = "Template data"
 +++
 
 # Template data

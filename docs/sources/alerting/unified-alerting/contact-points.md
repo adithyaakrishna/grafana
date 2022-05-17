@@ -1,7 +1,8 @@
 +++
-title = "Contact points"
+aliases = ["/docs/grafana/latest/alerting/contact-points/", "/docs/grafana/latest/alerting/unified-alerting/contact-points/"]
 description = "Create or edit contact point"
 keywords = ["grafana", "alerting", "guide", "contact point", "notification channel", "create"]
+title = "Contact points"
 weight = 430
 +++
 
