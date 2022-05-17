@@ -30,7 +30,7 @@ const (
 	documentFieldInternalID  = "__internal_id" // only for migrations! (indexed as a string)
 )
 
-func initIndex(dashboards []dashboard, logger log.Logger, extenders []ExtendDocumentFunc) (*bluge.Reader, *bluge.Writer, error) {
+func initIndex(dashboards []Dashboard, logger log.Logger, extenders []ExtendDocumentFunc) (*bluge.Reader, *bluge.Writer, error) {
 	writer, err := bluge.OpenWriter(bluge.InMemoryOnlyConfig())
 	if err != nil {
 		return nil, nil, fmt.Errorf("error opening writer: %v", err)
@@ -101,7 +101,7 @@ func initIndex(dashboards []dashboard, logger log.Logger, extenders []ExtendDocu
 	return reader, writer, err
 }
 
-func extendDoc(dash dashboard, doc *bluge.Document, extenders []ExtendDocumentFunc) error {
+func extendDoc(dash Dashboard, doc *bluge.Document, extenders []ExtendDocumentFunc) error {
 	for _, extend := range extenders {
 		if err := extend(dash, doc); err != nil {
 			return err
@@ -110,7 +110,7 @@ func extendDoc(dash dashboard, doc *bluge.Document, extenders []ExtendDocumentFu
 	return nil
 }
 
-func getFolderDashboardDoc(dash dashboard) *bluge.Document {
+func getFolderDashboardDoc(dash Dashboard) *bluge.Document {
 	uid := dash.uid
 	url := fmt.Sprintf("/dashboards/f/%s/%s", dash.uid, dash.slug)
 	if uid == "" {
@@ -129,7 +129,7 @@ func getFolderDashboardDoc(dash dashboard) *bluge.Document {
 		AddField(bluge.NewKeywordField(documentFieldInternalID, fmt.Sprintf("%d", dash.id)).Aggregatable().StoreValue())
 }
 
-func getNonFolderDashboardDoc(dash dashboard, location string) *bluge.Document {
+func getNonFolderDashboardDoc(dash Dashboard, location string) *bluge.Document {
 	url := fmt.Sprintf("/d/%s/%s", dash.uid, dash.slug)
 
 	// Dashboard document
@@ -170,7 +170,7 @@ func getNonFolderDashboardDoc(dash dashboard, location string) *bluge.Document {
 	return doc
 }
 
-func getDashboardPanelDocs(dash dashboard, location string) []*bluge.Document {
+func getDashboardPanelDocs(dash Dashboard, location string) []*bluge.Document {
 	var docs []*bluge.Document
 	url := fmt.Sprintf("/d/%s/%s", dash.uid, dash.slug)
 	for _, panel := range dash.info.Panels {
