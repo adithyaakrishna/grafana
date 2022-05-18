@@ -1493,6 +1493,21 @@ type: docker
 ---
 depends_on: []
 kind: pipeline
+name: swagger-documents-generation
+node:
+  type: no-parallel
+platform:
+  arch: amd64
+  os: linux
+services: []
+steps:
+- commands:
+  - echo $DRONE_RUNNER_NAME
+  image: alpine:3.15
+  name: identify-runner
+---
+depends_on: []
+kind: pipeline
 name: oss-build-e2e-publish-release
 node:
   type: no-parallel
