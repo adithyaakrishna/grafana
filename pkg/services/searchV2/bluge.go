@@ -153,8 +153,6 @@ func getNonFolderDashboardDoc(dash dashboard, location string) *bluge.Document {
 		}
 	}
 
-	// TODO: enterprise, add dashboard sorting fields
-
 	return doc
 }
 
@@ -345,8 +343,10 @@ func doSearchQuery(ctx context.Context, logger log.Logger, reader *bluge.Reader,
 	}
 	req.WithStandardAggregations()
 
-	// SortBy([]string{"-_score", "name"})
-	//	req.SortBy([]string{documentFieldName})
+	// Field must be .Sortable() for sort to work with it.
+	if q.Sort != "" {
+		req.SortBy([]string{q.Sort})
+	}
 
 	for _, t := range q.Facet {
 		lim := t.Limit
